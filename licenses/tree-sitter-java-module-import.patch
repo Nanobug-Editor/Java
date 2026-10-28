@@ -1,0 +1,19 @@
+diff --git a/grammar.js b/grammar.js
+--- a/grammar.js
++++ b/grammar.js
+@@ -841,7 +841,12 @@
+     import_declaration: $ => seq(
+       'import',
+-      optional('static'),
+-      $._name,
+-      optional(seq('.', $.asterisk)),
++      choice(
++        seq('module', $._name),
++        seq(
++          optional('static'),
++          $._name,
++          optional(seq('.', $.asterisk)),
++        ),
++      ),
+       ';',
+     ),

@@ -1,0 +1,10 @@
+{
+  "component": "Microsoft Java Debug Server",
+  "version": "0.53.2",
+  "source": "https://github.com/microsoft/java-debug/tree/54058b9eb466576a7a77c9303963ca88967ec58b",
+  "distribution": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscjava/vsextensions/vscode-java-debug/0.60.0/vspackage",
+  "distribution_sha256": "cc567d5ee8992ac34c2514c93c26bf009b72fb8fa65dbc00e42a4fe876c54b01",
+  "entry": "extension/server/com.microsoft.java.debug.plugin-0.53.2.jar",
+  "sha256": "a1844dc833ef5237f03d68f794cc2eb879331c41dd7b5c27d1e0b0c616afc52e",
+  "license": "MIT; see vscode-java-debug-LICENSE.txt and vscode-java-debug-ThirdPartyNotices.txt"
+}

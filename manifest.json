@@ -1,0 +1,1630 @@
+{
+  "id": "java",
+  "name": "Java",
+  "version": "0.1.34",
+  "service_preparation_hook": true,
+  "protocol": 7,
+  "scope": "workspace",
+  "component": "java.wasm",
+  "contributions": "plugin.toml",
+  "storage_limit": 33554432,
+  "permissions": [
+    "editor.read",
+    "editor.write",
+    "workspace.read",
+    "workspace.write",
+    "ui.panels",
+    "process.exec",
+    "process.service.analysis",
+    "dependencies.prepare",
+    "storage",
+    "process.service.local-runtime",
+    "process.service.local8",
+    "process.service.managed8",
+    "process.service.compiler8",
+    "process.service.local11",
+    "process.service.managed11",
+    "process.service.compiler11",
+    "process.service.local17",
+    "process.service.managed17",
+    "process.service.compiler17",
+    "process.service.local21",
+    "process.service.managed21",
+    "process.service.compiler21",
+    "process.service.local25",
+    "process.service.managed25",
+    "process.service.compiler25",
+    "native.modules"
+  ],
+  "api": {
+    "base": "^1",
+    "required": {
+      "language.lsp": ">=1.9,<2",
+      "language.editing": ">=1.3,<2",
+      "language.content": "^1",
+      "editor.virtual": ">=1.1,<2",
+      "language.formatting": "^1",
+      "configuration": "^1",
+      "dependencies": ">=1.4,<2",
+      "process": ">=1.9,<2",
+      "tools.inspect": "^1",
+      "workspace.files": ">=1.4,<2",
+      "editor.edit": ">=1.1,<2",
+      "editor.documents": ">=1.1,<2",
+      "ui.native": "^1",
+      "ui.panels": "^1",
+      "plugin.services": ">=1.1,<2",
+      "language.control": "^1",
+      "language.modules": "^1"
+    }
+  },
+  "settings": {
+    "java.project": {
+      "title": "Java source project (JSON) / Java 源码项目（JSON）",
+      "value_type": {
+        "kind": "string",
+        "max_length": 4096
+      },
+      "default": "{}",
+      "scope": "project"
+    },
+    "java.runtime": {
+      "title": "Language runtime java executable / 语言服务 Java 可执行文件",
+      "value_type": {
+        "kind": "string",
+        "max_length": 4096
+      },
+      "default": "",
+      "scope": "user"
+    },
+    "java.jdkHome": {
+      "title": "Local project JDK directory / 项目本机 JDK 目录",
+      "value_type": {
+        "kind": "string",
+        "max_length": 4096
+      },
+      "default": "",
+      "scope": "project"
+    },
+    "java.jdkVersion": {
+      "title": "Project JDK version / 项目 JDK 版本",
+      "value_type": {
+        "kind": "enum",
+        "choices": [
+          "8",
+          "11",
+          "17",
+          "21",
+          "25"
+        ]
+      },
+      "default": "25",
+      "scope": "project"
+    }
+  },
+  "services": {
+    "analysis": {
+      "program": "nanobug-java-native",
+      "on_demand": true,
+      "installation": {
+        "executable": "adapter/java-adapter.exe",
+        "artifacts": [
+          {
+            "id": "adapter",
+            "version": "0.1.34",
+            "platform": "windows-x86_64",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "source": {
+              "kind": "package",
+              "path": "native/java-adapter.exe"
+            },
+            "format": {
+              "kind": "file",
+              "path": "java-adapter.exe"
+            }
+          }
+        ]
+      },
+      "platforms": [
+        "windows-x86_64"
+      ]
+    },
+    "local-runtime": {
+      "program": "java",
+      "platforms": [
+        "windows-x86_64"
+      ]
+    },
+    "local8": {
+      "program": "java",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "search_paths": [
+        "C:/Program Files/Eclipse Adoptium/jdk8*/bin/java.exe",
+        "C:/Program Files/Eclipse Adoptium/jdk-8*/bin/java.exe",
+        "C:/Program Files/Eclipse Adoptium/jdk1.8*/bin/java.exe",
+        "C:/Program Files/Java/jdk8*/bin/java.exe",
+        "C:/Program Files/Java/jdk-8*/bin/java.exe",
+        "C:/Program Files/Java/jdk1.8*/bin/java.exe",
+        "C:/Program Files/Amazon Corretto/jdk8*/bin/java.exe",
+        "C:/Program Files/Zulu/zulu-8*/bin/java.exe",
+        "${HOME}/scoop/apps/temurin8-jdk/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk8/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk/current/bin/java.exe"
+      ]
+    },
+    "managed8": {
+      "program": "java",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk8/jdk8u504-b01/bin/java.exe",
+        "artifacts": [
+          {
+            "id": "jdk8",
+            "version": "jdk8u504-b01",
+            "platform": "windows-x86_64",
+            "sha256": "ea43d46ede95b51e44a12c66711706cddc762e0a766c54bccea18954e902b2aa",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jdk_x64_windows_hotspot_8u504b01.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "compiler8": {
+      "program": "javac",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk8/jdk8u504-b01/bin/javac.exe",
+        "artifacts": [
+          {
+            "id": "jdk8",
+            "version": "jdk8u504-b01",
+            "platform": "windows-x86_64",
+            "sha256": "ea43d46ede95b51e44a12c66711706cddc762e0a766c54bccea18954e902b2aa",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jdk_x64_windows_hotspot_8u504b01.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "local11": {
+      "program": "java",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "search_paths": [
+        "C:/Program Files/Eclipse Adoptium/jdk-11*/bin/java.exe",
+        "C:/Program Files/Java/jdk-11*/bin/java.exe",
+        "C:/Program Files/Amazon Corretto/jdk11*/bin/java.exe",
+        "C:/Program Files/Zulu/zulu-11*/bin/java.exe",
+        "${HOME}/scoop/apps/temurin11-jdk/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk11/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk/current/bin/java.exe"
+      ]
+    },
+    "managed11": {
+      "program": "java",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk11/jdk-11.0.32.1+1/bin/java.exe",
+        "artifacts": [
+          {
+            "id": "jdk11",
+            "version": "jdk-11.0.32.1+1",
+            "platform": "windows-x86_64",
+            "sha256": "d5008f02174c1ad21c10407cbf104815cb390ec4c263d53946e8d0507d7a77f9",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jdk_x64_windows_hotspot_11.0.32.1_1.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "compiler11": {
+      "program": "javac",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk11/jdk-11.0.32.1+1/bin/javac.exe",
+        "artifacts": [
+          {
+            "id": "jdk11",
+            "version": "jdk-11.0.32.1+1",
+            "platform": "windows-x86_64",
+            "sha256": "d5008f02174c1ad21c10407cbf104815cb390ec4c263d53946e8d0507d7a77f9",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jdk_x64_windows_hotspot_11.0.32.1_1.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "local17": {
+      "program": "java",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "search_paths": [
+        "C:/Program Files/Eclipse Adoptium/jdk-17*/bin/java.exe",
+        "C:/Program Files/Java/jdk-17*/bin/java.exe",
+        "C:/Program Files/Amazon Corretto/jdk17*/bin/java.exe",
+        "C:/Program Files/Zulu/zulu-17*/bin/java.exe",
+        "${HOME}/scoop/apps/temurin17-jdk/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk17/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk/current/bin/java.exe"
+      ]
+    },
+    "managed17": {
+      "program": "java",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk17/jdk-17.0.20.1+1/bin/java.exe",
+        "artifacts": [
+          {
+            "id": "jdk17",
+            "version": "jdk-17.0.20.1+1",
+            "platform": "windows-x86_64",
+            "sha256": "e53a79c3c3d86865bd7e787903884331068e71321714ffd44f145785affc7cb0",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.20.1%2B1/OpenJDK17U-jdk_x64_windows_hotspot_17.0.20.1_1.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "compiler17": {
+      "program": "javac",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk17/jdk-17.0.20.1+1/bin/javac.exe",
+        "artifacts": [
+          {
+            "id": "jdk17",
+            "version": "jdk-17.0.20.1+1",
+            "platform": "windows-x86_64",
+            "sha256": "e53a79c3c3d86865bd7e787903884331068e71321714ffd44f145785affc7cb0",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.20.1%2B1/OpenJDK17U-jdk_x64_windows_hotspot_17.0.20.1_1.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "local21": {
+      "program": "java",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "search_paths": [
+        "C:/Program Files/Eclipse Adoptium/jdk-21*/bin/java.exe",
+        "C:/Program Files/Java/jdk-21*/bin/java.exe",
+        "C:/Program Files/Amazon Corretto/jdk21*/bin/java.exe",
+        "C:/Program Files/Zulu/zulu-21*/bin/java.exe",
+        "${HOME}/scoop/apps/temurin21-jdk/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk21/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk/current/bin/java.exe"
+      ]
+    },
+    "managed21": {
+      "program": "java",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk21/jdk-21.0.12.1+1/bin/java.exe",
+        "artifacts": [
+          {
+            "id": "jdk21",
+            "version": "jdk-21.0.12.1+1",
+            "platform": "windows-x86_64",
+            "sha256": "f9d6e191ab098c0d416e7d588a24420a8621cd2f4720dab2459b8b7b2d2d8b4e",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_windows_hotspot_21.0.12.1_1.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "compiler21": {
+      "program": "javac",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk21/jdk-21.0.12.1+1/bin/javac.exe",
+        "artifacts": [
+          {
+            "id": "jdk21",
+            "version": "jdk-21.0.12.1+1",
+            "platform": "windows-x86_64",
+            "sha256": "f9d6e191ab098c0d416e7d588a24420a8621cd2f4720dab2459b8b7b2d2d8b4e",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_windows_hotspot_21.0.12.1_1.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "local25": {
+      "program": "java",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "search_paths": [
+        "C:/Program Files/Eclipse Adoptium/jdk-25*/bin/java.exe",
+        "C:/Program Files/Java/jdk-25*/bin/java.exe",
+        "C:/Program Files/Amazon Corretto/jdk25*/bin/java.exe",
+        "C:/Program Files/Zulu/zulu-25*/bin/java.exe",
+        "${HOME}/scoop/apps/temurin25-jdk/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk25/current/bin/java.exe",
+        "${HOME}/scoop/apps/openjdk/current/bin/java.exe"
+      ]
+    },
+    "managed25": {
+      "program": "java",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk25/jdk-25.0.4.1+1/bin/java.exe",
+        "artifacts": [
+          {
+            "id": "jdk25",
+            "version": "jdk-25.0.4.1+1",
+            "platform": "windows-x86_64",
+            "sha256": "00c847d804f4a78e9f04f2683faf14fed898535b177b7fc704486cb0284e9283",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.4.1%2B1/OpenJDK25U-jdk_x64_windows_hotspot_25.0.4.1_1.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    },
+    "compiler25": {
+      "program": "javac",
+      "on_demand": true,
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "installation": {
+        "executable": "jdk25/jdk-25.0.4.1+1/bin/javac.exe",
+        "artifacts": [
+          {
+            "id": "jdk25",
+            "version": "jdk-25.0.4.1+1",
+            "platform": "windows-x86_64",
+            "sha256": "00c847d804f4a78e9f04f2683faf14fed898535b177b7fc704486cb0284e9283",
+            "source": {
+              "kind": "url",
+              "url": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.4.1%2B1/OpenJDK25U-jdk_x64_windows_hotspot_25.0.4.1_1.zip"
+            },
+            "format": {
+              "kind": "zip"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "plugin_services": {
+    "provides": {
+      "debug.session": {
+        "version": "1.2.0",
+        "methods": {
+          "threads": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "threads": {
+                  "type": "array",
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "id": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 2147483647
+                      },
+                      "name": {
+                        "type": "string",
+                        "max_bytes": 512
+                      }
+                    }
+                  },
+                  "max_items": 256
+                },
+                "selected": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 2147483647
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "thread_frames": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                },
+                "thread": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 2147483647
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "frames": {
+                  "type": "array",
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "id": {
+                        "type": "integer",
+                        "min": 0,
+                        "max": 2147483647
+                      },
+                      "name": {
+                        "type": "string",
+                        "max_bytes": 512
+                      },
+                      "source": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      },
+                      "line": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 2147483647
+                      }
+                    }
+                  },
+                  "max_items": 256
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "variable_children": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                },
+                "thread": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 2147483647
+                },
+                "frame": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 2147483647
+                },
+                "reference": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 2147483647
+                },
+                "start": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 2147483647
+                },
+                "count": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 100
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "variables": {
+                  "type": "array",
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "max_bytes": 512
+                      },
+                      "value": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      },
+                      "reference": {
+                        "type": "integer",
+                        "min": 0,
+                        "max": 2147483647
+                      },
+                      "named": {
+                        "type": "integer",
+                        "min": 0,
+                        "max": 2147483647
+                      },
+                      "indexed": {
+                        "type": "integer",
+                        "min": 0,
+                        "max": 2147483647
+                      }
+                    }
+                  },
+                  "max_items": 100
+                },
+                "more": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "start": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "program": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "args": {
+                  "type": "array",
+                  "max_items": 128,
+                  "items": {
+                    "type": "string",
+                    "max_bytes": 4096
+                  }
+                },
+                "cwd": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "name": {
+                  "type": "string",
+                  "max_bytes": 256
+                },
+                "env": {
+                  "type": "array",
+                  "max_items": 64,
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "max_bytes": 128
+                      },
+                      "value": {
+                        "type": "string",
+                        "max_bytes": 32768
+                      }
+                    }
+                  }
+                },
+                "breakpoints": {
+                  "type": "array",
+                  "max_items": 512,
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "source": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      },
+                      "line": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 2147483647
+                      }
+                    }
+                  }
+                },
+                "stop_on_entry": {
+                  "type": "boolean"
+                }
+              },
+              "optional": [
+                "cwd",
+                "name",
+                "env",
+                "breakpoints",
+                "stop_on_entry"
+              ]
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "state": {
+                  "type": "string",
+                  "max_bytes": 32
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              }
+            },
+            "permissions": [
+              "process.exec",
+              "ui.panels"
+            ]
+          },
+          "set_breakpoints": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "breakpoints": {
+                  "type": "array",
+                  "max_items": 512,
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "source": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      },
+                      "line": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 2147483647
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "breakpoints": {
+                  "type": "array",
+                  "max_items": 512,
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "source": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      },
+                      "line": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 2147483647
+                      },
+                      "verified": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "resume": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "state": {
+                  "type": "string",
+                  "max_bytes": 32
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "pause": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "state": {
+                  "type": "string",
+                  "max_bytes": 32
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "step": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                },
+                "kind": {
+                  "type": "string",
+                  "max_bytes": 32
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "state": {
+                  "type": "string",
+                  "max_bytes": 32
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "frames": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "frames": {
+                  "type": "array",
+                  "max_items": 256,
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "id": {
+                        "type": "integer",
+                        "min": 0,
+                        "max": 2147483647
+                      },
+                      "name": {
+                        "type": "string",
+                        "max_bytes": 512
+                      },
+                      "source": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      },
+                      "line": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 2147483647
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "variables": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                },
+                "frame": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 2147483647
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "variables": {
+                  "type": "array",
+                  "max_items": 512,
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "max_bytes": 512
+                      },
+                      "value": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "status": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "state": {
+                  "type": "string",
+                  "max_bytes": 32
+                },
+                "reason": {
+                  "type": "string",
+                  "max_bytes": 64
+                },
+                "source": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "line": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 2147483647
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              },
+              "optional": [
+                "reason",
+                "source",
+                "line"
+              ]
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          },
+          "stop": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "session": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "state": {
+                  "type": "string",
+                  "max_bytes": 32
+                },
+                "pause": {
+                  "type": "integer",
+                  "min": 0,
+                  "max": 9223372036854775807
+                }
+              }
+            },
+            "permissions": [
+              "process.exec"
+            ]
+          }
+        },
+        "preparation": {
+          "start": [
+            "analysis",
+            "managed8",
+            "managed11",
+            "managed17",
+            "managed21",
+            "managed25"
+          ]
+        }
+      },
+      "run.targets": {
+        "version": "1.1.0",
+        "preparation": {
+          "prepare": [
+            "analysis",
+            "managed8",
+            "managed11",
+            "managed17",
+            "managed21",
+            "managed25"
+          ]
+        },
+        "methods": {
+          "discover": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "workspace": {
+                  "type": "string",
+                  "max_bytes": 4096
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "targets": {
+                  "type": "array",
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "identity": {
+                        "type": "string",
+                        "max_bytes": 256
+                      },
+                      "label": {
+                        "type": "string",
+                        "max_bytes": 256
+                      },
+                      "source": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      },
+                      "target_type": {
+                        "type": "string",
+                        "max_bytes": 128
+                      },
+                      "type_version": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 2147483647
+                      },
+                      "binding": {
+                        "type": "string",
+                        "max_bytes": 4096
+                      }
+                    }
+                  },
+                  "max_items": 128
+                }
+              }
+            },
+            "permissions": [
+              "workspace.read",
+              "process.exec"
+            ]
+          },
+          "prepare": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "workspace": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "binding": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "env": {
+                  "type": "array",
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "max_bytes": 128
+                      },
+                      "value": {
+                        "type": "string",
+                        "max_bytes": 32768
+                      }
+                    }
+                  },
+                  "max_items": 64
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "program": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "prefix_args": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "max_bytes": 4096
+                  },
+                  "max_items": 128
+                }
+              },
+              "optional": [
+                "prefix_args"
+              ]
+            },
+            "permissions": [
+              "workspace.read",
+              "process.exec",
+              "ui.panels"
+            ]
+          }
+        }
+      },
+      "run.configurations": {
+        "version": "1.0.0",
+        "methods": {
+          "catalog": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "workspace": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "locale": {
+                  "type": "string",
+                  "max_bytes": 64
+                },
+                "os": {
+                  "type": "string",
+                  "max_bytes": 64
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "payload": {
+                  "type": "string",
+                  "max_bytes": 65536
+                }
+              }
+            },
+            "permissions": [
+              "workspace.read",
+              "process.exec"
+            ]
+          },
+          "form": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "workspace": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "locale": {
+                  "type": "string",
+                  "max_bytes": 64
+                },
+                "os": {
+                  "type": "string",
+                  "max_bytes": 64
+                },
+                "template": {
+                  "type": "string",
+                  "max_bytes": 256
+                },
+                "values": {
+                  "type": "string",
+                  "max_bytes": 16384
+                },
+                "event": {
+                  "type": "string",
+                  "max_bytes": 65536
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "payload": {
+                  "type": "string",
+                  "max_bytes": 65536
+                }
+              }
+            },
+            "permissions": [
+              "workspace.read",
+              "ui.panels"
+            ]
+          },
+          "validate": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "workspace": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "locale": {
+                  "type": "string",
+                  "max_bytes": 64
+                },
+                "os": {
+                  "type": "string",
+                  "max_bytes": 64
+                },
+                "template": {
+                  "type": "string",
+                  "max_bytes": 256
+                },
+                "values": {
+                  "type": "string",
+                  "max_bytes": 16384
+                },
+                "intent": {
+                  "type": "string",
+                  "max_bytes": 64
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "payload": {
+                  "type": "string",
+                  "max_bytes": 65536
+                }
+              }
+            },
+            "permissions": [
+              "workspace.read",
+              "process.exec"
+            ]
+          }
+        }
+      },
+      "java.project": {
+        "version": "1.2.0",
+        "methods": {
+          "launch": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "project": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "key": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "generation": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9007199254740991
+                },
+                "main_class": {
+                  "type": "string",
+                  "max_bytes": 4096
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "binding": {
+                  "type": "string",
+                  "max_bytes": 4096
+                }
+              }
+            },
+            "permissions": [
+              "workspace.read",
+              "process.exec"
+            ]
+          },
+          "attach": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "document": {
+                  "type": "record",
+                  "fields": {
+                    "path": {
+                      "type": "string",
+                      "max_bytes": 4096
+                    },
+                    "generation": {
+                      "type": "integer",
+                      "min": 0,
+                      "max": 9007199254740991
+                    }
+                  }
+                },
+                "project": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "jdk": {
+                  "type": "string",
+                  "max_bytes": 16
+                },
+                "key": {
+                  "type": "string",
+                  "max_bytes": 128
+                },
+                "generation": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9007199254740991
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "binding": {
+                  "type": "string",
+                  "max_bytes": 128
+                }
+              }
+            },
+            "permissions": [
+              "editor.read",
+              "workspace.read",
+              "native.modules"
+            ]
+          },
+          "attach_metadata": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "document": {
+                  "type": "record",
+                  "fields": {
+                    "path": {
+                      "type": "string",
+                      "max_bytes": 4096
+                    },
+                    "generation": {
+                      "type": "integer",
+                      "min": 0,
+                      "max": 9007199254740991
+                    }
+                  }
+                },
+                "project": {
+                  "type": "string",
+                  "max_bytes": 32768
+                },
+                "jdk": {
+                  "type": "string",
+                  "max_bytes": 16
+                },
+                "key": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "generation": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9007199254740991
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "binding": {
+                  "type": "string",
+                  "max_bytes": 128
+                }
+              }
+            },
+            "permissions": [
+              "editor.read",
+              "workspace.read",
+              "native.modules"
+            ]
+          },
+          "launch_metadata": {
+            "parameters": {
+              "type": "record",
+              "fields": {
+                "project": {
+                  "type": "string",
+                  "max_bytes": 32768
+                },
+                "key": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "generation": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9007199254740991
+                },
+                "main_class": {
+                  "type": "string",
+                  "max_bytes": 4096
+                }
+              }
+            },
+            "result": {
+              "type": "record",
+              "fields": {
+                "binding": {
+                  "type": "string",
+                  "max_bytes": 4096
+                },
+                "env": {
+                  "type": "array",
+                  "items": {
+                    "type": "record",
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "max_bytes": 128
+                      },
+                      "value": {
+                        "type": "string",
+                        "max_bytes": 32768
+                      }
+                    }
+                  },
+                  "max_items": 64
+                }
+              }
+            },
+            "permissions": [
+              "workspace.read",
+              "process.exec"
+            ]
+          }
+        }
+      }
+    },
+    "requires": {}
+  },
+  "language_servers": [
+    {
+      "id": "analysis",
+      "language": "java",
+      "content": {
+        "schemes": [
+          "jdt"
+        ],
+        "method": "workspace/textDocumentContent",
+        "language": "java"
+      },
+      "service": "analysis",
+      "hook": true,
+      "primary": true,
+      "formatting": true,
+      "editing": true,
+      "workspace_edits": true,
+      "completion_triggers": [
+        ".",
+        "@",
+        ":"
+      ]
+    },
+    {
+      "id": "project-analysis",
+      "language": "java",
+      "content": {
+        "schemes": [
+          "jdt"
+        ],
+        "method": "workspace/textDocumentContent",
+        "language": "java"
+      },
+      "service": "analysis",
+      "hook": true,
+      "primary": true,
+      "formatting": true,
+      "editing": true,
+      "workspace_edits": true,
+      "completion_triggers": [
+        ".",
+        "@",
+        ":"
+      ],
+      "internal": true,
+      "readiness": {"notification":"nanobug/javaReady","pointer":"/ready","expected":true,"timeout_ms":120000},
+      "control_methods": {
+        "java/project/ready": {
+          "parameters": {
+            "type": "null"
+          },
+          "result": {
+            "type": "null"
+          },
+          "permissions": [
+            "editor.read",
+            "workspace.read",
+            "native.modules"
+          ]
+        }
+      }
+    }
+  ]
+}

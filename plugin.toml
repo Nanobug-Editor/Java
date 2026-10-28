@@ -1,0 +1,19 @@
+# Language identity and grammar are independent public contributions.
+[plugin]
+id = "java"
+name = "Java"
+version = "0.1.34"
+host_version = ">=0.1.0"
+
+[[language_definitions]]
+id = "java"
+name = "Java"
+extensions = ["java"]
+
+[[highlighters]]
+id = "java-syntax"
+language = "java"
+grammar_name = "java"
+grammar = "grammar/java.wasm"
+highlights = "queries/highlights.scm"
+tree_sitter_abi = 14

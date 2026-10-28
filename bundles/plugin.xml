@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <extension point="org.eclipse.jdt.ls.core.importers">
+    <importer id="nanobugExplicitProject" order="100" class="org.nanobug.java.ExplicitProjectImporter"/>
+  </extension>
+  <extension point="org.eclipse.jdt.ls.core.buildSupport">
+    <buildSupport id="nanobugLocalSourcesOnly" order="900" class="org.nanobug.java.LocalSourcesOnly"/>
+  </extension>
+  <extension point="org.eclipse.jdt.ls.core.delegateCommandHandler">
+    <delegateCommandHandler class="org.nanobug.java.DiagnosticsCommand">
+      <command id="nanobug.java.diagnostics"/>
+    </delegateCommandHandler>
+    <delegateCommandHandler class="org.nanobug.java.ProjectContextCommand">
+      <command id="nanobug.java.project.ready"/>
+    </delegateCommandHandler>
+  </extension>
+</plugin>

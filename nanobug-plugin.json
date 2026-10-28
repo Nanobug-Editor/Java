@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "manifest": "manifest.json",
+  "output": "dist",
+  "wasm": {"manifest": "Cargo.toml"},
+  "native": [{
+    "program": "javac",
+    "args": ["--release", "21", "-cp", "{project}\\server\\plugins\\*", "-d", "{build}\\java-diagnostics-classes", "{project}\\bundles\\src\\org\\nanobug\\java\\DiagnosticsCommand.java", "{project}\\bundles\\src\\org\\nanobug\\java\\LocalSourcesOnly.java", "{project}\\bundles\\src\\org\\nanobug\\java\\ProjectContextCommand.java", "{project}\\bundles\\src\\org\\nanobug\\java\\ExplicitProjectImporter.java", "{project}\\bundles\\src\\org\\nanobug\\java\\ProjectGraph.java"],
+    "platform": "windows-x86_64", "optional_platform": true
+  }, {
+    "program": "jar",
+    "args": ["--create", "--file", "{build}\\java-diagnostics.jar", "--manifest", "{project}\\bundles\\MANIFEST.MF", "-C", "{build}\\java-diagnostics-classes", ".", "-C", "{project}\\bundles", "plugin.xml"],
+    "platform": "windows-x86_64", "optional_platform": true
+  }, {
+    "program": "cargo",
+    "args": ["build", "--manifest-path", "{project}/native/Cargo.toml", "--release", "--target-dir", "{build}/native"],
+    "platform": "windows-x86_64",
+    "optional_platform": true
+  }],
+  "assets": [
+    {"source": "plugin.toml", "destination": "plugin.toml"},
+    {"source": "grammar", "destination": "grammar"},
+    {"source": "queries", "destination": "queries"},
+    {"source": "server", "destination": "server"},
+    {"source": "{build}/native/release/nanobug-java-native.exe", "destination": "native/java-adapter.exe", "platform": "windows-x86_64"},
+    {"source": "{build}/java-diagnostics.jar", "destination": "native/java-diagnostics.jar", "platform": "windows-x86_64"},
+    {"source": "native/java-debug.jar", "destination": "native/java-debug.jar", "platform": "windows-x86_64"},
+    {"source": "bundles", "destination": "sources/diagnostics"},
+    {"source": "README.md", "destination": "README.md"},
+    {"source": "README.zh-CN.md", "destination": "README.zh-CN.md"},
+    {"source": "licenses", "destination": "licenses"},
+    {"source": "LICENSE", "destination": "LICENSE"}
+  ]
+}

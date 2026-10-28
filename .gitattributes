@@ -1,0 +1,3 @@
+# Preserve upstream legal bytes and the manifest's required terminating empty section.
+licenses/** -text -whitespace
+bundles/MANIFEST.MF -text whitespace=-blank-at-eof

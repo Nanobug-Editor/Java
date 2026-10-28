@@ -1,0 +1,7 @@
+[
+  {"major":8,"version":"jdk8u504-b01","folder":"jdk8u504-b01","sha256":"ea43d46ede95b51e44a12c66711706cddc762e0a766c54bccea18954e902b2aa","url":"https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jdk_x64_windows_hotspot_8u504b01.zip","size":106457258},
+  {"major":11,"version":"jdk-11.0.32.1+1","folder":"jdk-11.0.32.1+1","sha256":"d5008f02174c1ad21c10407cbf104815cb390ec4c263d53946e8d0507d7a77f9","url":"https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jdk_x64_windows_hotspot_11.0.32.1_1.zip","size":199461714},
+  {"major":17,"version":"jdk-17.0.20.1+1","folder":"jdk-17.0.20.1+1","sha256":"e53a79c3c3d86865bd7e787903884331068e71321714ffd44f145785affc7cb0","url":"https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.20.1%2B1/OpenJDK17U-jdk_x64_windows_hotspot_17.0.20.1_1.zip","size":190817615},
+  {"major":21,"version":"jdk-21.0.12.1+1","folder":"jdk-21.0.12.1+1","sha256":"f9d6e191ab098c0d416e7d588a24420a8621cd2f4720dab2459b8b7b2d2d8b4e","url":"https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_windows_hotspot_21.0.12.1_1.zip","size":205073461},
+  {"major":25,"version":"jdk-25.0.4.1+1","folder":"jdk-25.0.4.1+1","sha256":"00c847d804f4a78e9f04f2683faf14fed898535b177b7fc704486cb0284e9283","url":"https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.4.1%2B1/OpenJDK25U-jdk_x64_windows_hotspot_25.0.4.1_1.zip","size":141167264}
+]
