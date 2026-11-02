@@ -1,0 +1,3 @@
+# Native Windows helpers embed the CRT; WASI guest components keep their own target settings.
+[target.'cfg(all(target_os = "windows", target_env = "msvc"))']
+rustflags = ["-C", "target-feature=+crt-static"]

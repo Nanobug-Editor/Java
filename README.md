@@ -1,5 +1,7 @@
 # Java for Nanobug
 
+Version **0.1.35** targets the Nanobug internal-test build of 2026-11-02 through the public host SDK. Installation IDs and permissions are preserved. Windows native helpers included in this package use a statically linked runtime.
+
 Independent Java language plugin, currently under development. Maven is implemented separately;
 Gradle, Lombok and JUnit remain separate planned plugins.
 
@@ -7,7 +9,7 @@ Gradle, Lombok and JUnit remain separate planned plugins.
 
 The development version provides plain Java project settings, controlled JDT LS analysis, and private JDK preparation. Java 8, 11, 17, 21 and 25 selection and semantic diagnostics have been exercised through actual packages. Native preview and group Undo cover cross-file symbol rename, including top-level class filenames; quick fixes and import organization also use preview. JDK and local JAR code opens read-only, using local sources before decompilation. Native GPUI tests have passed compilation, console input/output, Stop, Rerun and complete debug interaction, including thread selection, all three step controls, lazy objects and array/collection paging. Package/directory refactors and resource creation/deletion are not supported by the current editing bridge.
 
-The analysis, compile/run and launch-debug matrix has passed on all five JDK versions, including an independent target working directory. Tree-sitter 0.23.5 parses Java 25 compact sources but currently rejects `import module`; its patch still needs a verified grammar build. Older packages show an update requirement. Development candidates have not been published.
+The analysis, compile/run and launch-debug matrix has passed on all five JDK versions, including an independent target working directory. Tree-sitter 0.23.5 parses Java 25 compact sources but currently rejects `import module`; its patch still needs a verified grammar build. Older packages show an update requirement. Use the separately versioned Release package with the matching Nanobug host.
 
 Build a development package through the selected Nanobug executable:
 
